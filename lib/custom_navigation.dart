@@ -1,34 +1,8 @@
 import 'dart:math';
 
+import 'package:custom_bottomnavigation/navigation_items.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-
-enum NavigationItems {
-  home,
-  search,
-  notification,
-  profile,
-  settings,
-}
-
-extension NavigationContentExtension on NavigationItems {
-  IconData get icon {
-    switch (this) {
-      case NavigationItems.home:
-        return Icons.home;
-      case NavigationItems.search:
-        return Icons.search;
-      case NavigationItems.notification:
-        return Icons.notifications;
-      case NavigationItems.profile:
-        return Icons.person;
-      case NavigationItems.settings:
-        return Icons.settings;
-      default:
-        return Icons.home;
-    }
-  }
-}
 
 class NavSettings {
   static final Color navBgColor = Colors.blue[200]!;
@@ -47,7 +21,10 @@ class NavSettings {
 
 class CustomNavigation extends HookWidget {
   final Function(int) onTap;
-  const CustomNavigation({super.key, required this.onTap});
+  const CustomNavigation({
+    super.key,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {

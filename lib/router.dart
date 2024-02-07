@@ -1,4 +1,5 @@
 import 'package:custom_bottomnavigation/custom_navigation.dart';
+import 'package:custom_bottomnavigation/navigation_items.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -7,43 +8,33 @@ final GoRouter router = GoRouter(initialLocation: '/', routes: <RouteBase>[
     path: '/',
     builder: (BuildContext context, GoRouterState state) {
       return Scaffold(
-        backgroundColor: Colors.blue[50],
+        backgroundColor: Colors.blue[300],
         body: Center(
             child: ElevatedButton(
                 onPressed: () {
-                  context.go('/home');
+                  context.go(NavigationItems.home.route);
                 },
-                child: Text('start'))),
+                child: const Text('start'))),
       );
     },
   ),
+
+  /// bottomNavigationBar Route
   ShellRoute(
     builder: (BuildContext context, GoRouterState state, Widget child) {
-      void handleOnTap(i) {
-        print('Tapped :$i');
-        switch (i) {
-          case 0:
-            context.go('/home');
-            break;
-          case 1:
-            context.go('/search');
-            break;
-          case 2:
-            context.go('/notification');
-            break;
-          case 3:
-            context.go('/account');
-            break;
-          case 4:
-            context.go('/settings');
-            break;
+      /// tap callback & navigation
+      void handleOnTap(tappedIndex) {
+        for (NavigationItems item in NavigationItems.values) {
+          if (tappedIndex == item.index) {
+            context.go(item.route);
+          }
         }
       }
 
       return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.blue[100],
-          title: Text('Custom NavBar Demo'),
+          title: const Text('Custom NavBar Demo'),
         ),
         body: Stack(
           children: [
@@ -61,14 +52,17 @@ final GoRouter router = GoRouter(initialLocation: '/', routes: <RouteBase>[
         builder: (BuildContext context, GoRouterState state) {
           return Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text('home'),
+                const Text('home'),
                 ElevatedButton(
                   onPressed: () {
                     context.go('/');
                   },
-                  child: Text('Start'),
+                  child: const Text('Go To Top Page'),
+                ),
+                const SizedBox(
+                  height: 10,
                 ),
               ],
             ),
@@ -78,28 +72,27 @@ final GoRouter router = GoRouter(initialLocation: '/', routes: <RouteBase>[
       GoRoute(
         path: '/search',
         builder: (BuildContext context, GoRouterState state) {
-          return Center(child: Text('search'));
+          return const Center(child: Text('search'));
         },
       ),
       GoRoute(
         path: '/notification',
         builder: (BuildContext context, GoRouterState state) {
-          return Center(child: Text('notification'));
+          return const Center(child: Text('notification'));
         },
       ),
       GoRoute(
         path: '/account',
         builder: (BuildContext context, GoRouterState state) {
-          return Center(child: Text('account'));
+          return const Center(child: Text('account'));
         },
       ),
       GoRoute(
         path: '/settings',
         builder: (BuildContext context, GoRouterState state) {
-          return Center(child: Text('settings'));
+          return const Center(child: Text('settings'));
         },
       ),
-      // 他の子ルートをここに追加
     ],
   ),
 ]);
