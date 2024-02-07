@@ -1,6 +1,7 @@
 # custom_bottomnavigation
 
-A new Flutter project.
+![tinywow_cbn_47179108](https://github.com/shogoisaji/custom_bottom_navbar/assets/131496728/c5712fa8-cc08-4ed4-a9b3-5aa8501dcf70)
+
 
 ## Getting Started
 
